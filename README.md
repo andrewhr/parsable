@@ -14,6 +14,10 @@ It's my May 2011 RMU project. :)
 * Simple parser, wrapping the default 1.9.2 CSV parser.
 * Setup model <=> headers relation through DSL.
 
+### Requirements ###
+
+For this first implementation, only ruby 1.9.2 or greater are supported.
+
 ### First iteration ###
 
 * Create a simple gem, that currently only have the underlining parser,
