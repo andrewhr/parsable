@@ -11,11 +11,11 @@ module Parsable
       @options = options.merge(:headers => true)
     end
 
-    def parse(&block)
+    def parse
       records = []
       CSV.foreach(@filename, @options) do |row|
         record = parse_row(row)
-        block.call(record) unless block.nil?
+        yield record if block_given?
         records << record
       end
       records
