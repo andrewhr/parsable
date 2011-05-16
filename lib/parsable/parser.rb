@@ -27,6 +27,10 @@ module Parsable
       attributes[name].converter = options[:type]
     end
 
+    def add_converter(name, &block)
+      converters[name] = block
+    end
+
     private
 
     def attributes
@@ -44,7 +48,7 @@ module Parsable
     end
 
     def converters
-      { :integer => lambda { |v| v.to_i } }
+      @converters ||= { :integer => lambda { |v| v.to_i } }
     end
 
     def convert(value, converter)

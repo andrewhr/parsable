@@ -45,4 +45,13 @@ describe Parser do
     end
   end
 
+  it "accepts custom converters for more clean specifications" do
+    @parser.parse_attribute(:string, :type => :chunky)
+    @parser.add_converter :chunky do |value|
+      "CHUNKY BACON"
+    end
+    record = @parser.parse.first
+    record[:string].should == "CHUNKY BACON"
+  end
+
 end
