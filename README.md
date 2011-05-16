@@ -29,17 +29,21 @@ on 1.8.7 CSV lib.
 The parser is really pretty simple, due to fact that FasterCSV is really
 good. Heres a simple way to use it:
 
-  parser = Parser.new "filename.csv"
-  parser.parse_attribute :attribute_name_same_as_header
-  parser.parse_attribute :nice_attribute, :from_column => :very_ugly_name
-  records = parser.parse
+        parser = Parser.new "filename.csv"
+        parser.parse_attribute :attribute_name_same_as_header
+        parser.parse_attribute :nice_attribute, :from_column => :very_ugly_name
+        records = parser.parse
+
+Only explicit request attributes will be imported. That way we could ignore unwanted columns, and made the proccess less error prone.
 
 The records are returned as array of Hash attributes. That was made for
 easy record creation through ActiveRecord.
 
 ### Todo for the next iteration ###
 
-To be defined
+* Support for ruby 1.8 through explicity import of FasterCSV.
+* Specify column through a DSL incorporated to ActiveRecord models.
+* Error reporting.
 
 ### Copywrith ###
 
