@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe DSL do
+describe Parsable::DSL do
 
   def mock_parser(stubs = {})
     @mock_parser ||= mock(Parser, stubs).as_null_object
   end
 
   before(:each) do
-    @klass = Class.new { include DSL }
+    @klass = Class.new { include Parsable::DSL }
     @klass.stub(:parser) { mock_parser }
   end
 
