@@ -6,14 +6,11 @@ module Parsable
 
     AttributeInfo = Struct.new :column_header, :converter
 
-    def initialize(filename, options = Hash.new)
-      @filename = filename
-      @options = options.merge(:headers => true)
-    end
+    def parse(filename, options = {})
+      options = options.merge(:headers => true)
 
-    def parse
       records = []
-      CSV.foreach(@filename, @options) do |row|
+      CSV.foreach(filename, options) do |row|
         record = parse_row(row)
         yield record if block_given?
         records << record
