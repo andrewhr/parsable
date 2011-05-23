@@ -44,9 +44,10 @@ describe Parser do
 
   it "yields processed attributes for each call to a given block" do
     @parser.parse_attribute(:string)
-    should_receive(:yielded).twice.with(hash_including(:string))
-    @parser.parse(@filename) do |record|
-      yielded(record)
+    should_receive(:yielded).with(hash_including(:string), 1)
+    should_receive(:yielded).with(hash_including(:string), 2)
+    @parser.parse(@filename) do |record, lineno|
+      yielded(record, lineno)
     end
   end
 

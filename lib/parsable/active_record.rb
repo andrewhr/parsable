@@ -1,4 +1,5 @@
 require 'parsable/dsl'
+require 'parsable/report'
 require 'active_record'
 
 module Parsable
@@ -16,12 +17,17 @@ module Parsable
 
         def import(filename, options={})
           records = []
-          parse_csv(filename, options) do |attributes|
+          report = Report.new(filename)
+          parse_csv(filename, options) do |attributes, lineno|
             record = create(attributes)
-            yield record if block_given?
-            records << record
+            if record.valid?
+              yield record if block_given?
+              records << record
+            else
+              report.report_errors(record.errors, lineno)
+            end
           end
-          records
+          report
         end
 
       end

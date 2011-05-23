@@ -7,13 +7,14 @@ module Parsable
 
     AttributeInfo = Struct.new :column_header, :converter
 
-    def parse(filename, options = {})
+    def parse(filename, options = {}, &block)
       options = options.merge(:headers => true)
 
       records = []
-      CSV.foreach(filename, options) do |row|
+      CSV.read(filename, options).each_with_index do |row, lineno|
         record = parse_row(row)
-        yield record if block_given?
+        # add 1 to line number to compensate header line
+        block.call(record, lineno + 1) if block
         records << record
       end
       records
@@ -39,7 +40,7 @@ module Parsable
       record = {}
       attributes.each do |attr, info|
         value = row[info.column_header.to_s]
-        value = convert(value, info.converter) unless info.converter.nil?
+        value = convert(value, info.converter) if info.converter
         record[attr] = value
       end
       record
