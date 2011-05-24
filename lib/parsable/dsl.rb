@@ -14,7 +14,7 @@ module Parsable
 
       def column(name, options = {})
         attribute_name = options.delete(:as) || name
-        options = options.merge(:from_column => name)
+        options        = options.merge(:from_column => name)
         parser.parse_attribute(attribute_name, options)
       end
 

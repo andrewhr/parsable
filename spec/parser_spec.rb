@@ -46,6 +46,7 @@ describe Parser do
     @parser.parse_attribute(:string)
     should_receive(:yielded).with(hash_including(:string), 1)
     should_receive(:yielded).with(hash_including(:string), 2)
+
     @parser.parse(@filename) do |record, lineno|
       yielded(record, lineno)
     end

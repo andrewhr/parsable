@@ -17,16 +17,20 @@ module Parsable
 
         def import(filename, options={})
           records = []
-          report = Report.new(filename)
+          report  = Report.new(filename)
+
           parse_csv(filename, options) do |attributes, lineno|
             record = create(attributes)
+
             if record.valid?
               yield record if block_given?
               records << record
             else
               report.report_errors(record.errors, lineno)
             end
+
           end
+
           report
         end
 

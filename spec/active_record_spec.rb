@@ -11,8 +11,10 @@ describe Parsable::ActiveRecord::Extensions do
     it "creates a new record for each row" do
       @model = Class.new(ActiveRecord::Base)
       @model.should_receive(:parse_csv).and_yield({"these" => "attributes"}, 1)
-      @model.should_receive(:create).with({"these" => "attributes"}) { record_mock }
+      @model.should_receive(:create).
+             with({"these" => "attributes"}) { record_mock }
       record_mock.stub(:valid?) { true }
+
       @model.import("path/to/file.csv")
     end
 
@@ -27,7 +29,8 @@ describe ActiveRecord::Base do
   end
 
   it "should include Parsable::ActiveRecord::Extensions" do
-    ActiveRecord::Base.included_modules.should include(Parsable::ActiveRecord::Extensions)
+    included_modules = ActiveRecord::Base.included_modules
+    included_modules.should include(Parsable::ActiveRecord::Extensions)
   end
 
 end

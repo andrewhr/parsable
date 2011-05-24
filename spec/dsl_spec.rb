@@ -42,13 +42,14 @@ describe Parsable::DSL do
 
     it "delegates to Parsable::Parser#parse with options if provided" do
       mock_parser.should_receive(:parse).with(anything,
-                                               hash_including(:col_sep => "<3"))
+                                              hash_including(:col_sep => "<3"))
       @klass.parse_csv "path/to/file.csv", :col_sep => "<3"
     end
 
     it "delegates to Parsable::Parser#parse and yields a attribute hash" do
       mock_parser.should_receive(:parse).and_yield({"some" => "attributes"})
       should_receive(:yielded).with({"some" => "attributes"})
+
       @klass.parse_csv "path/to/file.csv" do |attributes|
         yielded(attributes)
       end
