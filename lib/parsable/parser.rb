@@ -1,5 +1,10 @@
 # encoding: UTF-8
-require 'csv'
+if RUBY_VERSION < "1.9"
+  require 'fastercsv'
+  CSV = FasterCSV
+else
+  require 'csv'
+end
 
 module Parsable
 
