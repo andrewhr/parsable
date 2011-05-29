@@ -1,5 +1,4 @@
-require 'parsable/dsl'
-require 'parsable/report'
+require 'parsable/import'
 require 'active_record'
 
 module Parsable
@@ -8,27 +7,11 @@ module Parsable
 
     module Extensions
       extend ActiveSupport::Concern
-      include DSL
 
       module ClassMethods
 
-        def import(filename, options={})
-          records = []
-          report  = Report.new(filename)
-
-          parse_csv(filename, options) do |attributes, lineno|
-            record = create(attributes)
-
-            if record.valid?
-              yield record if block_given?
-              records << record
-            else
-              report.report_errors(record.errors, lineno)
-            end
-
-          end
-
-          report
+        def importable_from_csv
+          include Parsable::ActiveRecord::Import
         end
 
       end
