@@ -8,7 +8,7 @@ module Parsable
 
     module Import
       extend ActiveSupport::Concern
-      include DSL
+      include Parsable::DSL
 
       module ClassMethods
 
