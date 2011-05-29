@@ -1,10 +1,9 @@
+require 'active_support'
+
 module Parsable
 
   module DSL
-
-    def self.included(base)
-      base.extend ClassMethods
-    end
+    extend ActiveSupport::Concern
 
     module ClassMethods
 

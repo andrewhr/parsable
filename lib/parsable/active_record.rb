@@ -7,11 +7,8 @@ module Parsable
   module ActiveRecord
 
     module Extensions
-
-      def self.included(base)
-        base.extend(ClassMethods)
-        base.send :include, DSL
-      end
+      extend ActiveSupport::Concern
+      include DSL
 
       module ClassMethods
 
