@@ -1,9 +1,7 @@
-Parsable
+Importable
 ==========
 
-WIP
-
-Parsable aims to be a easy bridge to importing data from csv file to a
+Importable aims to be a easy bridge to importing data from csv file to a
 Rails app. That's achieved by configuring your models through a simple
 DSL, that will parse and import the given data directly to database.
 
@@ -46,6 +44,8 @@ In this iteration, I've implemented the DSL for using Parsable with
 ActiveRecord. The final result looks like:
 
         class Model < ActiveRecord::Base
+          importable_from_csv
+          
           column :id, :type => :integer
           column :weird_column, :as => :nice_attribute
         end
@@ -57,10 +57,6 @@ Now you can tell yor model to import csv files.
 
 They will return a report with all errors found when trying to create the records. By now,
 the errors are only those caught by ActiveRecord validations.
-
-### Todo for the next iteration ###
-
-* Support for ruby 1.8 through explicity import of FasterCSV.
 
 ### Copywrith ###
 

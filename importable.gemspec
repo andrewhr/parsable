@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "parsable/version"
+require "importable/version"
 
 Gem::Specification.new do |s|
-  s.name        = "parsable"
-  s.version     = Parsable::VERSION
+  s.name        = "importable"
+  s.version     = Importable::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Andrew Rosa"]
   s.email       = ["andrewhr@me.com"]

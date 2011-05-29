@@ -1,6 +1,6 @@
 require 'active_support'
 
-module Parsable
+module Importable
 
   module DSL
     extend ActiveSupport::Concern

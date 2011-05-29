@@ -1,6 +1,6 @@
 require 'bundler/setup'
-require 'parsable'
+require 'importable'
 
 RSpec.configure do |c|
-  include Parsable
+  include Importable
 end

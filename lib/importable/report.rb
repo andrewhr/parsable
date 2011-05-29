@@ -1,4 +1,4 @@
-module Parsable
+module Importable
 
   class Report
 

@@ -6,7 +6,7 @@ else
   require 'csv'
 end
 
-module Parsable
+module Importable
 
   class Parser
 

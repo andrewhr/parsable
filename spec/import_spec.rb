@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Parsable::ActiveRecord::Import do
+describe Importable::ActiveRecord::Import do
   
   def record_mock(stubs = {})
     @record_mock = mock(@model).as_null_object
@@ -8,13 +8,13 @@ describe Parsable::ActiveRecord::Import do
 
   before(:each) do
     @model = Class.new(ActiveRecord::Base) do
-      include Parsable::ActiveRecord::Import
+      include Importable::ActiveRecord::Import
     end
   end
 
   it "should include DSL module" do
     included_modules = @model.included_modules
-    included_modules.should include(Parsable::DSL)
+    included_modules.should include(Importable::DSL)
   end
 
   describe "when importing" do 
@@ -29,7 +29,5 @@ describe Parsable::ActiveRecord::Import do
     end
 
   end
-
-
 
 end

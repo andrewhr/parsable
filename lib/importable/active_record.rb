@@ -1,7 +1,7 @@
-require 'parsable/import'
+require 'importable/import'
 require 'active_record'
 
-module Parsable
+module Importable
   
   module ActiveRecord
 
@@ -11,7 +11,7 @@ module Parsable
       module ClassMethods
 
         def importable_from_csv
-          include Parsable::ActiveRecord::Import
+          include Importable::ActiveRecord::Import
         end
 
       end
@@ -22,4 +22,4 @@ module Parsable
 
 end
 
-ActiveRecord::Base.send :include, Parsable::ActiveRecord::Extensions
+ActiveRecord::Base.send :include, Importable::ActiveRecord::Extensions

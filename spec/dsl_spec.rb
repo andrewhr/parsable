@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-describe Parsable::DSL do
+describe Importable::DSL do
 
   def mock_parser(stubs = {})
     @mock_parser ||= mock(Parser, stubs).as_null_object
   end
 
   before(:each) do
-    @klass = Class.new { include Parsable::DSL }
+    @klass = Class.new { include Importable::DSL }
     @klass.stub(:parser) { mock_parser }
   end
 
   describe ".column" do
 
-    it "delegates to Parsable::Parser#parse_attribute" do
+    it "delegates to Importable::Parser#parse_attribute" do
       mock_parser.should_receive(:parse_attribute).
                   with(:header, hash_including(:from_column => :header))
       @klass.column :header
@@ -35,18 +35,18 @@ describe Parsable::DSL do
 
   describe ".parse_csv" do
 
-    it "delegates to Parsable::Parser#parse" do
+    it "delegates to Importable::Parser#parse" do
       mock_parser.should_receive(:parse).with("path/to/file.csv", anything)
       @klass.parse_csv "path/to/file.csv"
     end
 
-    it "delegates to Parsable::Parser#parse with options if provided" do
+    it "delegates to Importable::Parser#parse with options if provided" do
       mock_parser.should_receive(:parse).with(anything,
                                               hash_including(:col_sep => "<3"))
       @klass.parse_csv "path/to/file.csv", :col_sep => "<3"
     end
 
-    it "delegates to Parsable::Parser#parse and yields a attribute hash" do
+    it "delegates to Importable::Parser#parse and yields a attribute hash" do
       mock_parser.should_receive(:parse).and_yield({"some" => "attributes"})
       should_receive(:yielded).with({"some" => "attributes"})
 

@@ -1,14 +1,14 @@
-require 'parsable/dsl'
-require 'parsable/report'
+require 'importable/dsl'
+require 'importable/report'
 require 'active_support'
 
-module Parsable
+module Importable
 
   module ActiveRecord
 
     module Import
       extend ActiveSupport::Concern
-      include Parsable::DSL
+      include Importable::DSL
 
       module ClassMethods
 
